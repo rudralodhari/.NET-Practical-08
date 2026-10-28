@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<Inventory_module.Models.Product>
+
+<h2>Product List</h2>
+
+<p>
+    @Html.ActionLink("Add New Product", "Create")
+</p>
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProductId</td>
+            <td>@item.ProductName</td>
+            <td>@item.Quantity</td>
+            <td>@item.Price</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit",
+                    new { id = item.ProductId })
+
+                @using (Html.BeginForm("Delete", "Product",
+                    new { id = item.ProductId },
+                    FormMethod.Post))
+                {
+                    <input type="submit" value="Delete"
+                           onclick="return confirm('Delete this product?');" />
+                }
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,39 @@
+﻿
+@model Inventory_module.Models.Product
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.ProductId)
+
+    <p>
+        Product Name:
+        @Html.TextBoxFor(m => m.ProductName,
+            new { required = "required" })
+    </p>
+
+    <p>
+        Quantity:
+        @Html.TextBoxFor(m => m.Quantity,
+            new { type = "number", min = "0", required = "required" })
+    </p>
+
+    <p>
+        Price:
+        @Html.TextBoxFor(m => m.Price,
+            new
+                 {
+                     type = "number",
+                     step = "0.01",
+                     min = "0",
+                  required = "required"
+                 })
+    </p>
+
+    <input type="submit" value="Update" />
+}
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
